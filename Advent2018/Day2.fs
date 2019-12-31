@@ -2,11 +2,12 @@
 
 open Shared
 
-let input2Path = "C:\\Users\\Jorge L Martinez Jr\\Source\\Repos\\advent-2018-fsharp\\Advent2018\\Input2.txt"
-let ids = readLines input2Path |> List.map Seq.toList // Read in the lines, split into char list list
-let countedByLetter = List.map (List.countBy id) ids 
+let countLettersInString = Seq.toList >> (List.countBy id)
+let countedByLetter = readLines "Input2.txt" |> List.map countLettersInString
 
-let kvListContainsValue x m = m |> Seq.exists (fun (_, v) -> v = x)
-let letterTwiceCount = countedByLetter |> List.filter (kvListContainsValue 2) |> List.length
-let letterThriceCount = countedByLetter |> List.filter (kvListContainsValue 3) |> List.length
+let kvListContainsValue x = Seq.exists (fun (_, v) -> v = x)
+let numWordsWithXLetters x = List.filter (kvListContainsValue x) >> List.length
+
+let letterTwiceCount = countedByLetter |> numWordsWithXLetters 2
+let letterThriceCount = countedByLetter |> numWordsWithXLetters 3
 let solution = letterTwiceCount * letterThriceCount
