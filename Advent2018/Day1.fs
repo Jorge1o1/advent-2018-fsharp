@@ -5,7 +5,6 @@ open Shared
 let input1Path = "C:\Users\jl_ma\Documents\Visual Studio 2017\Projects\Advent2018\Advent2018\Input1.txt"
 let nums =
     readLines input1Path
-    |> List.ofSeq
     |> List.map LanguagePrimitives.ParseInt32
 
 let rec firstDuplicate freqSet currSum lst =
